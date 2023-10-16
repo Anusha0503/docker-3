@@ -17,6 +17,9 @@ node {
                sh  " docker push public.ecr.aws/r5k2f6p1/deploy_to_eks:latest "
      }
     stage('Deploy to EKS'){
-              sh" helm upgrade --install nginx-release springboot"
+      withKubeConfig(caCertificate: '', clusterName: 'eks-cluster', contextName: '', credentialsId: 'deploy-to-eks-using-helm', namespace: '', restrictKubeConfigAccess: false, serverUrl: 'https://014FD438A6A69A09A93BEAFA72DB0F92.gr7.us-east-1.eks.amazonaws.com') {
+           sh" helm upgrade --install nginx-release springboot"
+}
+             
     }
 }
