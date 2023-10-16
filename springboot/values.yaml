@@ -41,7 +41,7 @@ securityContext: {}
 
 service:
   type: LoadBalancer
-  port: 8040
+  port: 80
   targetPort: 8080
 
 ingress:
