@@ -16,4 +16,7 @@ node {
                sh " docker tag deploy_to_eks:latest public.ecr.aws/r5k2f6p1/deploy_to_eks:latest "
                sh  " docker push public.ecr.aws/r5k2f6p1/deploy_to_eks:latest "
      }
+    stage('Deploy to EKS'){
+              sh" helm upgrade --install nginx-release springboot"
+    }
 }
