@@ -19,6 +19,7 @@ node {
     stage('Deploy to EKS'){
       withKubeConfig(caCertificate: '', clusterName: 'eks-cluster', contextName: '', credentialsId: 'deploy-to-eks-cluster-using-helm1', namespace: '', restrictKubeConfigAccess: false, serverUrl: 'https://014FD438A6A69A09A93BEAFA72DB0F92.gr7.us-east-1.eks.amazonaws.com') {
       sh " pwd "
+      sh "rm -rf .kube"
       sh " aws eks --region us-east-1 update-kubeconfig --name eks-cluster"
       sh" helm upgrade --install nginx-release springboot"
 }
