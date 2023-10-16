@@ -9,6 +9,11 @@ node {
                   }
               }
     stage ('docker build image'){
-      sh " docker build -t docker-3:v1 ."
+      sh " docker build -t deploy_to_eks ."
     }
+    stage ('ecr tag&Push image'){
+               sh " aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/r5k2f6p1 "
+               sh " docker tag deploy_to_eks:latest public.ecr.aws/r5k2f6p1/deploy_to_eks:latest "
+               sh  " docker push public.ecr.aws/r5k2f6p1/deploy_to_eks:latest "
+     }
 }
